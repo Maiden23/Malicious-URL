@@ -58,9 +58,10 @@ df = pd.read_csv("urldata.csv")
 
 ```bash
 predict("http://anuoluwapoegbedayo.org/secure/zigi.securities/")
+# Output: ('malicious', 1)
 ```
 
-# Output: ('malicious', 1)
+
 
 
 ## 🧠 Model Performance
