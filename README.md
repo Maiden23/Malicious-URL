@@ -12,7 +12,7 @@ Phishing and malicious websites pose a serious threat to online users. This proj
 
 ## 📂 Dataset
 
-- **Source**: [malicious_phish.csv](https://www.kaggle.com/datasets/sid321axn/malicious-phish)
+- **Source**: [malicious_phish.csv](https://www.kaggle.com/datasets/siddharthkumar25/malicious-and-benign-urls?resource=download)
 - **Labels**:
   - `0`: benign
   - `1`: malicious
