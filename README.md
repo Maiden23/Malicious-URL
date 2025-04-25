@@ -78,7 +78,9 @@ Output: ('malicious', 1)
 
 
 
-📌 Future Enhancements
+## 📌 Future Enhancements
+
+
 Add real-time URL scanning APIs
 
 Incorporate deep learning models (e.g., LSTM/CNN on character-level tokens)
