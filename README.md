@@ -75,6 +75,9 @@ Handles over 400k URLs efficiently
 >>> predict("https://paypal.support.free-offer.com")
 ```
 Output: ('malicious', 1)
+
+
+
 📌 Future Enhancements
 Add real-time URL scanning APIs
 
