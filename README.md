@@ -34,7 +34,7 @@ Phishing and malicious websites pose a serious threat to online users. This proj
 Install dependencies with:
 
 ```bash
-pip install pandas numpy scikit-learn xgboost imbalanced-learn tld tldextract
+pip install requirements.txt
 ```
 
 ## 🚀 How to Use
