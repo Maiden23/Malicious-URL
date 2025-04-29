@@ -1,15 +1,17 @@
 {
     "manifest_version": 3,
-    "name": "URL Classifier",
+    "name": "Malicious URL Checker",
     "version": "1.0",
-    "description": "Classify URLs as benign or malicious",
-    "permissions": [
-        "activeTab"
-    ],
-    "background": {
-        "service_worker": "background.js"
-    },
+    "description": "Checks if the current URL is malicious using a FastAPI model",
+    "permissions": ["tabs", "scripting"],
     "action": {
         "default_popup": "popup.html"
+    },
+    "host_permissions": ["<all_urls>"],
+    "content_scripts": [
+    {
+    "matches": ["<all_urls>"],
+    "js": ["content.js"]
     }
+    ]
 }
