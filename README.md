@@ -80,6 +80,6 @@ Output: ('malicious', 1)
 
 ## 🕸️ WEB EXTENSION 
 
-FASTAPI 
+FASTAPI for 
 
 
