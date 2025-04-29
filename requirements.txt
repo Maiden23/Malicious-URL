@@ -7,3 +7,7 @@ tensorflow
 urllib
 imblearn
 xgboost
+fastapi
+uvicorn
+
+

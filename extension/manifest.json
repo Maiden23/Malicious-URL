@@ -1,0 +1,15 @@
+{
+    "manifest_version": 3,
+    "name": "URL Classifier",
+    "version": "1.0",
+    "description": "Classify URLs as benign or malicious",
+    "permissions": [
+        "activeTab"
+    ],
+    "background": {
+        "service_worker": "background.js"
+    },
+    "action": {
+        "default_popup": "popup.html"
+    }
+}
