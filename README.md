@@ -34,7 +34,7 @@ Phishing and malicious websites pose a serious threat to online users. This proj
 Install dependencies with:
 
 ```bash
-pip install requirements.txt
+pip install -r requirements.txt
 ```
 
 ##  How to Use
