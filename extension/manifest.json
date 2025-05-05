@@ -8,10 +8,10 @@
         "default_popup": "popup.html"
     },
     "host_permissions": ["<all_urls>"],
-    "content_scripts": [
-    {
-    "matches": ["<all_urls>"],
-    "js": ["content.js"]
-    }
+    "web_accessible_resources": [
+        {
+            "resources": ["models/vectorizer.json", "models/logreg_model.json"],
+            "matches": ["<all_urls>"]
+        }
     ]
 }

@@ -2,10 +2,257 @@
 <html>
 <head>
     <title>URL Checker</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-light: #6366f1;
+            --primary-dark: #4338ca;
+            --danger: #ef4444;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --text: #1f2937;
+            --text-light: #6b7280;
+            --bg: #ffffff;
+            --bg-card: #f9fafb;
+            --bg-card-hover: #f3f4f6;
+            --border: #e5e7eb;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+        }
+
+        [data-theme="dark"] {
+            --primary: #6366f1;
+            --primary-light: #818cf8;
+            --primary-dark: #4f46e5;
+            --danger: #f87171;
+            --success: #34d399;
+            --warning: #fbbf24;
+            --text: #f9fafb;
+            --text-light: #9ca3af;
+            --bg: #111827;
+            --bg-card: #1f2937;
+            --bg-card-hover: #374151;
+            --border: #374151;
+            --shadow: rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+            min-width: 360px;
+            min-height: 200px;
+            overflow-x: hidden;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px;
+            background-color: var(--bg);
+            border-bottom: 1px solid var(--border);
+        }
+
+        h1 {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text);
+        }
+
+        .container {
+            padding: 16px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            box-shadow: 0 1px 3px var(--shadow);
+            margin-bottom: 16px;
+            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px var(--shadow);
+        }
+
+        #status {
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 14px;
+            line-height: 1.5;
+            background: var(--bg-card);
+            overflow-wrap: break-word;
+            transition: all 0.3s ease;
+        }
+
+        .status-safe {
+            background: rgba(16, 185, 129, 0.1) !important;
+            color: var(--success) !important;
+            border-left: 4px solid var(--success);
+        }
+
+        .status-malicious {
+            background: rgba(239, 68, 68, 0.1) !important;
+            color: var(--danger) !important;
+            border-left: 4px solid var(--danger);
+        }
+
+        .status-unknown {
+            background: rgba(245, 158, 11, 0.1) !important;
+            color: var(--warning) !important;
+            border-left: 4px solid var(--warning);
+        }
+
+        .emoji {
+            font-family: "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", "Segoe UI Symbol", "Android Emoji", sans-serif;
+            font-size: 18px;
+            vertical-align: middle;
+            margin-right: 8px;
+            display: inline-block;
+        }
+
+        .url-display {
+            font-size: 12px;
+            color: var(--text-light);
+            margin-bottom: 8px;
+            word-break: break-all;
+        }
+
+        .prediction {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .probability {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+            background-color: var(--bg-card-hover);
+        }
+
+        .theme-toggle {
+            background: transparent;
+            border: none;
+            color: var(--text-light);
+            cursor: pointer;
+            font-size: 18px;
+            padding: 4px;
+            border-radius: 4px;
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--bg-card-hover);
+        }
+
+        footer {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 16px;
+            font-size: 12px;
+            color: var(--text-light);
+            border-top: 1px solid var(--border);
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+            margin-left: 8px;
+        }
+
+        .badge-ai {
+            background-color: rgba(99, 102, 241, 0.1);
+            color: var(--primary);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --primary: #6366f1;
+                --primary-light: #818cf8;
+                --primary-dark: #4f46e5;
+                --danger: #f87171;
+                --success: #34d399;
+                --warning: #fbbf24;
+                --text: #f9fafb;
+                --text-light: #9ca3af;
+                --bg: #111827;
+                --bg-card: #1f2937;
+                --bg-card-hover: #374151;
+                --border: #374151;
+                --shadow: rgba(0, 0, 0, 0.3);
+            }
+        }
+    </style>
 </head>
 <body>
-    <h3>Malicious URL Checker</h3>
-    <p id="status">Checking...</p>
+    <header>
+        <h1>
+            <span class="emoji">&#x1F50D;</span>URL Checker
+            <span class="badge badge-ai">AI Powered</span>
+        </h1>
+        <button id="theme-toggle" class="theme-toggle" title="Toggle dark/light mode">
+            &#x1F31E;
+        </button>
+    </header>
+    <div class="container">
+        <div class="card">
+            <div id="status">Checking URL safety...</div>
+        </div>
+    </div>
+    <footer>
+        Secured by Malicious URL Detector v1.0
+    </footer>
+
     <script src="popup.js"></script>
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+        
+        // Check for saved theme preference or use device theme
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            body.dataset.theme = savedTheme;
+            updateThemeIcon(savedTheme);
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = body.dataset.theme;
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            body.dataset.theme = newTheme;
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        });
+        
+        function updateThemeIcon(theme) {
+            themeToggle.innerHTML = theme === 'dark' ? '&#x1F31E;' : '&#x1F31A;';
+        }
+    </script>
 </body>
 </html>
